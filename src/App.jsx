@@ -10,6 +10,7 @@ import SignupPage from "./app/pages/SignupPage";
 
 
 
+
 const router = createBrowserRouter([
   {
     path: "/",
@@ -31,6 +32,7 @@ const App = () => {
     <div className="">
 
 <RouterProvider  router={router} />
+
 
     </div>
   )
