@@ -60,7 +60,13 @@ const productLists = () => {
               <h1 className="text-4xl font-bold tracking-tight text-gray-900">
                 All Products
               </h1>
+<div className="flex flex-wrap gap-2">
+  <h1>Filter1</h1>
+  <h1>Filter1</h1>
+  <h1>Filter1</h1>
+  <h1>Filter1</h1>
 
+</div>
 
             </div>
 
@@ -75,15 +81,15 @@ const productLists = () => {
                 <div className="flex flex-wrap">
                   {/* product list */}
                   <div>
-                    <div className="bg-white">
-                      <div className="mx-auto w-full px-4 py-1 sm:px-0 sm:py-0 lg:w-full lg:px-8">
-                        <h2 className="text-2xl mb-2 font-bold tracking-tight text-gray-900">
+                    <div className="bg-violet-400 w-[95vw] ">
+                      <div className="mx-auto w-full pl-1 py-1 ">
+                        <h2 className="text-3xl mb-2 font-bold tracking-tight text-gray-900">
                           Latest
                         </h2>
 
-                        <div className="mt-4 grid grid-cols-3   w-full gap-x-6 gap-y-10 sm:grid-cols-1 lg:grid-cols-4 xl:gap-x-8">
+                        <div className="mt-4 flex flex-row flex-wrap gap-8 mb-4 justify-center">
                           {products.map((product) => (
-                            <div key={product.id} className="group relative bg-blue-100 rounded-xl ">
+                            <div key={product.id} className="group relative bg-blue-100 rounded-xl max-w-xl w-64 sm:mr-8 ">
                               <div className="aspect-h-1 aspect-w-1 w-full overflow-hidden rounded-md bg-gray-200 lg:aspect-none group-hover:opacity-75 lg:h-80">
                                 <img
                                   src={product.imageSrc}
@@ -91,9 +97,9 @@ const productLists = () => {
                                   className="h-full w-full object-cover object-center lg:h-full lg:w-full"
                                 />
                               </div>
-                              <div className="mt-4 flex justify-between px-2 pb-4">
+                              <div className="mt-4  flex justify-between gap-2 px-2 pb-4">
                                 <div>
-                                  <h3 className="text-sm text-gray-700">
+                                  <h3 className="text-xl text-gray-700">
                                     <a href={product.href}>
                                       <span
                                         aria-hidden="true"
@@ -102,11 +108,11 @@ const productLists = () => {
                                       {product.name}
                                     </a>
                                   </h3>
-                                  <p className="mt-1 text-sm text-gray-500">
+                                  <p className="mt-1 text-xl text-gray-500">
                                     {product.color}
                                   </p>
                                 </div>
-                                <a className="text-sm font-semibold h-fit w-fit px-2 py-2 mr-3 bg-violet-500 text-white rounded-lg">
+                                <a className=" text-lg font-bold h-fit w-fit px-2 py-2 mr-3 bg-violet-500 text-white rounded-lg">
                               Buy at {product.price}
                                 </a>
                               </div>

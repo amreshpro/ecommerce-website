@@ -1,4 +1,4 @@
-import Singup from "../features/auth/components/Signup"
+import Singup from "../components/Signup"
 
 const SignupPage = () => {
   return (

@@ -7,6 +7,9 @@ import {
 } from "react-router-dom";
 import LoginPage from "./app/pages/LoginPage";
 import SignupPage from "./app/pages/SignupPage";
+import Profile from "./app/features/mini/Profile";
+import CartList from "./app/features/mini/CartList";
+import Navbar from "./app/features/navbar/Navbar";
 
 
 
@@ -24,6 +27,25 @@ const router = createBrowserRouter([
     path:"/signup",
     element:<SignupPage/>
   },
+
+{
+  path:"/profile",
+  element:<>
+<Navbar/>
+<Profile/>
+  </>
+},
+{
+  path:"/cart",
+  element:(<>
+  <Navbar/>
+  <CartList/>
+ 
+  </>
+  )
+},
+
+
 ]);
 
 

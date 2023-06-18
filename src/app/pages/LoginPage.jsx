@@ -1,4 +1,4 @@
-import Login from "../features/auth/components/Login"
+import Login from "../components/Login"
 
 
 

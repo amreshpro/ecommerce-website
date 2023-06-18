@@ -3,10 +3,65 @@ import {LuMenu} from 'react-icons/lu'
 import {VscChromeClose} from 'react-icons/vsc'
 import {AiOutlineShoppingCart} from 'react-icons/ai'
 import {BsSearch} from 'react-icons/bs'
+import {AiOutlineHome} from 'react-icons/ai'
 import {CgProfile} from 'react-icons/cg'
 import { motion } from 'framer-motion'
 import {Link} from 'react-router-dom'
 
+import { BiSearch } from "react-icons/bi";
+
+
+
+
+// SearchBox Content
+const SearchBox = () => {
+  const [inputText, setInputText] = useState("");
+
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    console.log(inputText);
+
+    emptyTheInputBox();
+  };
+
+  const onKeyUpHandler = (e) => {
+    if (e.key === "Enter" || e.which === 14) {
+
+      emptyTheInputBox();
+    }
+  };
+
+  const emptyTheInputBox = () => {
+    setInputText("");
+  };
+
+  return (
+    <div className="flex justify-center flex-wrap  items-center mt-5 pt-5 xsm:gap-2">
+      <div className="inputBoxContainer px-2 sm:w-[80vw] ml-1 text-2xl sm:text-xl ">
+        <input
+          type="text"
+          value={inputText}
+          onChange={(e) => setInputText(e.target.value)}
+          onKeyUp={onKeyUpHandler}
+          autoFocus={true}
+          name="search"
+          className="bg-primary-200 zsm:ml-1 px-4 text-primary-900 placeholder-primary-600 h-full  py-1 outline-none"
+          placeholder="Search user product..."
+        />
+      </div>
+      <div className="  w-max  text-2xl  ">
+        <button
+          type="submit"
+          onClick={handleSubmit}
+          className="bg-primary-500 h-full text-violet-50  bg-violet-400 py-1.5 mt-1 px-2 sm:rounded-full "
+        >
+          {<BiSearch className="animate-bounce" />}
+        </button>
+      </div>
+    </div>
+  );
+};
 
 
 
@@ -14,8 +69,15 @@ import {Link} from 'react-router-dom'
 const Navbar = () => {
 
      const [isMenuOpen, setIsMenuOpenOpen] = useState(false)
+const [searchOpen, setSearchOpen] = useState(false)
 
 
+
+const handleSearchBox = ()=>{
+  setSearchOpen((prev)=>{
+    return prev===true?false:true
+  })
+}
 
   return (
 
@@ -38,12 +100,13 @@ const Navbar = () => {
 
 
 <ul className="flex  text-2xl pr-5 flex-row gap-4 pt-2  sm:hidden font-nunito  text-black">
+<li><Link to="/"><AiOutlineHome/></Link></li>
 
-<li><Link to="/"><BsSearch/></Link></li>
+<li><Link to="/" onClick={handleSearchBox}><BsSearch/></Link></li>
 
 
   <li><Link to="/cart"><AiOutlineShoppingCart/></Link></li>
-  <li><Link to="/contact"><CgProfile/></Link></li>
+  <li><Link to="/profile"><CgProfile/></Link></li>
     
 
 
@@ -76,12 +139,13 @@ const Navbar = () => {
   
   <ul className={` bg-white text-2xl text-black font-mono  justify-center px-4 flex flex-col gap-4 pt-1 pb-4 pr-2 ease-linear duration-1000`}>
   
+<li><Link to="/"><AiOutlineHome/></Link></li>
+  <li><Link to="/" onClick={handleSearchBox}><BsSearch/></Link></li>
 
-  <li><Link to="/"><BsSearch /></Link></li>
 
 
 <li><Link to="/cart"><AiOutlineShoppingCart/></Link></li>
-<li><Link to="/contact"><CgProfile/></Link></li>
+<li><Link to="/profile"><CgProfile/></Link></li>
 
   
 
@@ -90,7 +154,21 @@ const Navbar = () => {
 
 </motion.div>
 
+
+
+
+
+
 }
+
+
+<div className='mt-4'>
+
+{
+  searchOpen && <SearchBox/>
+}
+  </div>
+
     </>
   )
 }
