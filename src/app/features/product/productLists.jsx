@@ -2,55 +2,30 @@
 
 import { ChevronLeftIcon, ChevronRightIcon } from "@heroicons/react/20/solid";
 
+import axios from'axios'
+import { useState } from "react";
 
-
-const products = [
-  {
-    id: 1,
-    name: "Basic Tee",
-    href: "#",
-    imageSrc:
-      "https://tailwindui.com/img/ecommerce-images/product-page-01-related-product-01.jpg",
-    imageAlt: "Front of men's Basic Tee in black.",
-    price: "$35",
-    color: "Black",
-  },
-  {
-    id: 2,
-    name: "Basic Tee",
-    href: "#",
-    imageSrc:
-      "https://tailwindui.com/img/ecommerce-images/product-page-01-related-product-01.jpg",
-    imageAlt: "Front of men's Basic Tee in black.",
-    price: "$35",
-    color: "Black",
-  },
-  {
-    id: 3,
-    name: "Basic Tee",
-    href: "#",
-    imageSrc:
-      "https://tailwindui.com/img/ecommerce-images/product-page-01-related-product-01.jpg",
-    imageAlt: "Front of men's Basic Tee in black.",
-    price: "$35",
-    color: "Black",
-  },
-  {
-    id: 4,
-    name: "Basic Tee",
-    href: "#",
-    imageSrc:
-      "https://tailwindui.com/img/ecommerce-images/product-page-01-related-product-01.jpg",
-    imageAlt: "Front of men's Basic Tee in black.",
-    price: "$35",
-    color: "Black",
-  },
-];
 
 const productLists = () => {
 
-  
+  const [productFetchDetails, setProductFetchDetails] = useState([])
 
+const fetchAllProductDetails = async()=>{
+
+await axios("http://localhost:5000").then((responseData)=>{
+  console.log(responseData)
+  console.log(responseData.data)
+  console.log(responseData.data.products)
+setProductFetchDetails([...responseData.data.products])
+}).catch((err)=>{
+  console.log(err)
+})
+
+}
+
+fetchAllProductDetails()
+
+// console.log(productFetchDetails)
 
   return (
     <>
@@ -62,9 +37,9 @@ const productLists = () => {
               </h1>
 <div className="flex flex-wrap gap-2">
   <h1>Filter1</h1>
-  <h1>Filter1</h1>
-  <h1>Filter1</h1>
-  <h1>Filter1</h1>
+  <h1>Filter2</h1>
+  <h1>Filter3</h1>
+  <h1>Filter4</h1>
 
 </div>
 
@@ -74,50 +49,42 @@ const productLists = () => {
   
 
               <div className="">
-         
-
-
-                {/* Product grid */}
+                         {/* Product grid */}
                 <div className="flex flex-wrap">
                   {/* product list */}
                   <div>
-                    <div className="bg-violet-400 w-[95vw] ">
+                    <div className="bg-violet-100 w-[95vw] ">
                       <div className="mx-auto w-full pl-1 py-1 ">
                         <h2 className="text-3xl mb-2 font-bold tracking-tight text-gray-900">
                           Latest
                         </h2>
 
                         <div className="mt-4 flex flex-row flex-wrap gap-8 mb-4 justify-center">
-                          {products.map((product) => (
-                            <div key={product.id} className="group relative bg-blue-100 rounded-xl max-w-xl w-64 sm:mr-8 ">
-                              <div className="aspect-h-1 aspect-w-1 w-full overflow-hidden rounded-md bg-gray-200 lg:aspect-none group-hover:opacity-75 lg:h-80">
-                                <img
-                                  src={product.imageSrc}
-                                  alt={product.imageAlt}
-                                  className="h-full w-full object-cover object-center lg:h-full lg:w-full"
-                                />
-                              </div>
-                              <div className="mt-4  flex justify-between gap-2 px-2 pb-4">
-                                <div>
-                                  <h3 className="text-xl text-gray-700">
-                                    <a href={product.href}>
-                                      <span
-                                        aria-hidden="true"
-                                        className="absolute inset-0"
-                                      />
-                                      {product.name}
-                                    </a>
-                                  </h3>
-                                  <p className="mt-1 text-xl text-gray-500">
-                                    {product.color}
-                                  </p>
-                                </div>
-                                <a className=" text-lg font-bold h-fit w-fit px-2 py-2 mr-3 bg-violet-500 text-white rounded-lg">
-                              Buy at {product.price}
-                                </a>
-                              </div>
-                            </div>
-                          ))}
+                    
+{  productFetchDetails.map((product)=>{
+  console.log(product)
+  const {id,title,description,images,price} = product
+  return(
+    <section className="w-72 h-fit shadow-2xl rounded-xl bg-violet-500 m-2" key={id}>
+<div className="img">
+    <img src={images[0]} alt="project-image" className=" polygon rounded-t-xl bg-cover w-full" />
+</div>
+<div className="text bg-violet-500 rounded-b-xl px-2 py-2">
+    <h1 className=" text-center text-blue-100  text-2xl font-nunito font-bold">{title}</h1>
+    <p className="paragraph text-white font-nunito font-semibold mt-2 mb-2">{description}</p>
+    <div className="links flex gap-5 p-2">
+      
+  <a href="" className="px-2 py-1 flex gap-2 h-fit bg-white rounded-sm font-nunito font-bold text-violet-500"> ${price}</a>
+
+    </div>
+</div>
+
+    </section>
+  )
+})
+
+
+}
                         </div>
                       </div>
                     </div>
