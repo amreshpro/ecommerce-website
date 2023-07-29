@@ -1,31 +1,49 @@
-
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 import { ChevronLeftIcon, ChevronRightIcon } from "@heroicons/react/20/solid";
 
 import axios from'axios'
-import { useState } from "react";
+
+import { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { add } from "../../../store/addToCart";
+import productAPI from '../../../api/productAPI.js'
 
 
-const productLists = () => {
+const ProductLists = () => {
+  //  redux hook
+    const dispatch = useDispatch()
+
+    const addToCartMessage = () => toast("Item add to cart successfully!");
 
   const [productFetchDetails, setProductFetchDetails] = useState([])
 
-const fetchAllProductDetails = async()=>{
+useEffect(()=>{
+  // when backend -> http://localhost:5868
+//  axios("http://localhost:5868").then((responseData)=>{
+// setProductFetchDetails([...responseData.data.products])
 
-await axios("http://localhost:5000").then((responseData)=>{
-  console.log(responseData)
-  console.log(responseData.data)
-  console.log(responseData.data.products)
-setProductFetchDetails([...responseData.data.products])
-}).catch((err)=>{
-  console.log(err)
-})
+
+setProductFetchDetails(productAPI.products)
+
+// }).catch((err)=>{
+//   console.log(err)
+// })
+
+},[productFetchDetails])
+
+
+const AddToCartFunction=(currentCartItem)=>{
+
+
+
+dispatch(add(currentCartItem))
+addToCartMessage()
 
 }
 
-fetchAllProductDetails()
 
-// console.log(productFetchDetails)
 
   return (
     <>
@@ -62,20 +80,24 @@ fetchAllProductDetails()
                         <div className="mt-4 flex flex-row flex-wrap gap-8 mb-4 justify-center">
                     
 {  productFetchDetails.map((product)=>{
-  console.log(product)
+
+
   const {id,title,description,images,price} = product
+
+
+
   return(
     <section className="w-72 h-fit shadow-2xl rounded-xl bg-violet-500 m-2" key={id}>
 <div className="img">
-    <img src={images[0]} alt="project-image" className=" polygon rounded-t-xl bg-cover w-full" />
+    <img src={images[0]} alt="project-image" className=" polygon rounded-t-xl bg-cover object-fill h-64 w-full" />
 </div>
-<div className="text bg-violet-500 rounded-b-xl px-2 py-2">
+<div className="text bg-violet-500 rounded-b-xl px-2 py-2  ">
     <h1 className=" text-center text-blue-100  text-2xl font-nunito font-bold">{title}</h1>
     <p className="paragraph text-white font-nunito font-semibold mt-2 mb-2">{description}</p>
     <div className="links flex gap-5 p-2">
       
   <a href="" className="px-2 py-1 flex gap-2 h-fit bg-white rounded-sm font-nunito font-bold text-violet-500"> ${price}</a>
-
+<button className="bg-blue-500 text-white px-2 py-1 " onClick={()=>{AddToCartFunction(product) }}   >Add to Cart</button>
     </div>
 </div>
 
@@ -160,10 +182,11 @@ fetchAllProductDetails()
               </div>
             </div>
           </main>
-    
+          {/* only for toast working fine */}
+          <ToastContainer />
     </>
   )
 }
-export default productLists
+export default ProductLists
 
 
