@@ -1,15 +1,15 @@
 
 import Navbar from "../features/navbar/Navbar"
-import Rough from "../features/product/productLists"
+import ProductLists from "../features/product/ProductLists"
+
 
 
 const Home = () => {
   return (
     <div>
        <Navbar/>
-{/* <ProductList/>
- */}
-<Rough/>
+<ProductLists/>
+
     </div>
   )
 }
