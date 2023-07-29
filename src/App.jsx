@@ -10,6 +10,7 @@ import SignupPage from "./app/pages/SignupPage";
 import Profile from "./app/features/mini/Profile";
 import CartList from "./app/features/mini/CartList";
 import Navbar from "./app/features/navbar/Navbar";
+import AuthWrapper from "./app/components/AuthWrapper";
 
 
 
@@ -17,7 +18,7 @@ import Navbar from "./app/features/navbar/Navbar";
 const router = createBrowserRouter([
   {
     path: "/",
-    element: <Home/>,
+    element:<AuthWrapper> <Home/></AuthWrapper>,
   },
   {
     path: "/login",
@@ -31,15 +32,19 @@ const router = createBrowserRouter([
 {
   path:"/profile",
   element:<>
+  <AuthWrapper>
 <Navbar/>
 <Profile/>
+  </AuthWrapper>
   </>
 },
 {
   path:"/cart",
   element:(<>
+  <AuthWrapper>
   <Navbar/>
   <CartList/>
+  </AuthWrapper>
  
   </>
   )
