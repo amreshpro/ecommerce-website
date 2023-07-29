@@ -9,6 +9,7 @@ import { motion } from 'framer-motion'
 import {Link} from 'react-router-dom'
 
 import { BiSearch } from "react-icons/bi";
+import {  useSelector } from 'react-redux'
 
 
 
@@ -68,9 +69,14 @@ const SearchBox = () => {
 
 const Navbar = () => {
 
+const userDetails = useSelector((state)=>state.user)
+
+
+
      const [isMenuOpen, setIsMenuOpenOpen] = useState(false)
 const [searchOpen, setSearchOpen] = useState(false)
 
+const cartLength = useSelector((state)=>state.cart.length)
 
 
 const handleSearchBox = ()=>{
@@ -94,6 +100,9 @@ const handleSearchBox = ()=>{
 
 </motion.div>
 <h1 className="text-black text-2xl font-nunito  ">BoughtBazar</h1>
+
+
+<h1 className='text-black text-sm font-nunito ' >Welcome {userDetails.name}</h1>
 </div>
 
 
@@ -105,7 +114,7 @@ const handleSearchBox = ()=>{
 <li><Link to="/" onClick={handleSearchBox}><BsSearch/></Link></li>
 
 
-  <li><Link to="/cart"><AiOutlineShoppingCart/></Link></li>
+  <li><Link to="/cart" className="flex gap-0 "><AiOutlineShoppingCart/>  <h4 className={`text-sm bg-red-500 text-white rounded-full h-max mb-2 px-1.5 `}>{cartLength}</h4> </Link></li>
   <li><Link to="/profile"><CgProfile/></Link></li>
     
 
