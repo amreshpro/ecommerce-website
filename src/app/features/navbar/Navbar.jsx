@@ -48,7 +48,7 @@ const SearchBox = () => {
           autoFocus={true}
           name="search"
           className="bg-primary-200 zsm:ml-1 px-4 text-primary-900 placeholder-primary-600 h-full  py-1 outline-none"
-          placeholder="Search user product..."
+          placeholder="Search your product..."
         />
       </div>
       <div className="  w-max  text-2xl  ">
@@ -102,7 +102,7 @@ const handleSearchBox = ()=>{
 <h1 className="text-black text-2xl font-nunito  ">BoughtBazar</h1>
 
 
-<h1 className='text-black text-sm font-nunito ' >Welcome {userDetails.name}</h1>
+<h1 className='text-black text-sm font-nunito mt-2 ml-2 ' >Welcome {userDetails.name}</h1>
 </div>
 
 
