@@ -9,6 +9,52 @@ import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { add } from "../../../store/addToCart";
 import productAPI from '../../../api/productAPI.js'
+import { CurrencyBangladeshiIcon } from "@heroicons/react/24/outline";
+
+
+// filter category
+const filterCategory = [
+  {
+    name:"All",
+    category:"all"
+  },
+{
+  name:"Smartphones",
+  category:"smartphones"
+},
+{
+  name:"Laptops",
+  category:"laptops"
+},
+{
+  name:"Fragrances",
+  category:"fragrances"
+},
+{
+  name:"Skincare",
+  category:"skincare"
+},
+{
+  name:"Groceries",
+  category:"groceries"
+},
+{
+  name:"Home-Decoration",
+  category:"home-decoration"
+},
+{
+  name:"Furniture",
+  category:"furniture"
+},
+{
+  name:"Tops",
+  category:"tops"
+},
+{name:"Women",
+category:"womens-dresses"}
+
+]
+
 
 
 const ProductLists = () => {
@@ -17,32 +63,58 @@ const ProductLists = () => {
 
     const addToCartMessage = () => toast("Item add to cart successfully!");
 
+const [selectedCategoryFilter, setSelectedCategoryFilter] = useState("all")
   const [productFetchDetails, setProductFetchDetails] = useState([])
 
-useEffect(()=>{
-  // when backend -> http://localhost:5868
-//  axios("http://localhost:5868").then((responseData)=>{
-// setProductFetchDetails([...responseData.data.products])
+// useEffect(()=>{
+//   // when backend -> http://localhost:5868
+// //  axios("http://localhost:5868").then((responseData)=>{
+// // setProductFetchDetails([...responseData.data.products])
 
 
-setProductFetchDetails(productAPI.products)
+// // setProductFetchDetails(productAPI.products)
+// // AllProduct()
 
-// }).catch((err)=>{
-//   console.log(err)
+// // }).catch((err)=>{
+// //   console.log(err)
+// // })
+
 // })
-
-},[productFetchDetails])
 
 
 const AddToCartFunction=(currentCartItem)=>{
-
-
-
 dispatch(add(currentCartItem))
 addToCartMessage()
 
 }
 
+function AllProduct(){
+  setProductFetchDetails(productAPI.products)
+}
+
+function onCategoryFilter(){
+if(selectedCategoryFilter==='all'){
+  AllProduct()
+
+}
+else{
+ let filteredArray = productAPI.products.filter((item)=>{
+  if(item.category===selectedCategoryFilter){
+    return item
+  }
+ })
+
+setProductFetchDetails(filteredArray)
+}
+
+}
+
+useEffect(()=>{
+ 
+  onCategoryFilter()
+},[selectedCategoryFilter])
+
+console.log(selectedCategoryFilter)
 
 
   return (
@@ -53,11 +125,32 @@ addToCartMessage()
               <h1 className="text-4xl font-bold tracking-tight text-gray-900">
                 All Products
               </h1>
-<div className="flex flex-wrap gap-2">
-  <h1>Filter1</h1>
-  <h1>Filter2</h1>
-  <h1>Filter3</h1>
-  <h1>Filter4</h1>
+<div className="flex flex-wrap m-1 gap-2">
+
+
+<select onMouseOut={(e)=>{setSelectedCategoryFilter(e.target.value)}}>
+{/* <option  key="all" value="all" defaultValue="All" onSelect={AllProduct} >All</option> */}
+{
+ filterCategory.map((item)=>{
+  return(
+    <option  key={item.category} value={item.category} >{item.name}</option>
+  )
+ })
+}
+
+</select>
+
+
+
+{/* <h1 key="allcategory"  onClick={AllProduct}>All</h1>
+
+{
+ filterCategory.map((item)=>{
+  return(
+    <h1  key={item.category} onClick={(e)=>{onCategoryFilter(item.category)}}>{item.name}</h1>
+  )
+ })
+} */}
 
 </div>
 
@@ -132,15 +225,19 @@ addToCartMessage()
                   Next
                 </a>
               </div>
-              <div className="hidden sm:flex sm:flex-1 sm:items-center sm:justify-between">
-                <div>
+
+
+             <div className="hidden sm:flex sm:flex-1 sm:items-center sm:justify-between">
+                 {/* <div>
                   <p className="text-sm text-gray-700">
                     Showing <span className="font-medium">1</span> to{" "}
                     <span className="font-medium">10</span> of{" "}
                     <span className="font-medium">97</span> results
                   </p>
-                </div>
-                <div>
+                </div>  */}
+                <div> 
+
+
                   <nav
                     className="isolate inline-flex -space-x-px rounded-md shadow-sm"
                     aria-label="Pagination"
