@@ -133,7 +133,7 @@ console.log(selectedCategoryFilter)
 {
  filterCategory.map((item)=>{
   return(
-    <option  key={item.category} value={item.category} onClick={(e)=>{selectedCategoryFilter(e.target.value)}}  >{item.name}</option>
+    <option  key={item.category} value={item.category} onTouchEnd={(e)=>{selectedCategoryFilter(e.target.value)}}  >{item.name}</option>
   )
  })
 }
