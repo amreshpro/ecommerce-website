@@ -91,7 +91,7 @@ const handleSearchBox = ()=>{
     
 
 <nav className=" text-black flex justify-between px-2 py-4 bg-white">
-<div className="logo flex gap-2 ">
+<div className="logo flex gap-2 mr-1">
 
 
 <motion.div animate={{rotate:360}}>
@@ -99,10 +99,10 @@ const handleSearchBox = ()=>{
 <img src="https://tailwindui.com/img/ecommerce-images/shopping-cart-page-04-product-01.jpg" alt="logo"  className="w-10 animate-waving-hand" />
 
 </motion.div>
-<h1 className="text-black text-2xl font-nunito  ">BoughtBazar</h1>
+<h1 className="text-black text-2xl sm:text-xl font-nunito  ">Buyshy</h1>
 
 
-<h1 className='text-black text-sm font-nunito mt-2 ml-2 ' >Welcome {userDetails.name}</h1>
+<h1 className='text-black text-sm font-nunito mt-2 ml-0.5 ' >Welcome {userDetails.name}</h1>
 </div>
 
 
