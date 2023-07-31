@@ -128,12 +128,12 @@ console.log(selectedCategoryFilter)
 <div className="flex flex-wrap m-1 gap-2">
 
 
-<select onMouseOut={(e)=>{setSelectedCategoryFilter(e.target.value)}}  onPointerLeave={(e)=>{selectedCategoryFilter(e.target.value)}}>
+<select onMouseOut={(e)=>{setSelectedCategoryFilter(e.target.value)}}  >
 {/* <option  key="all" value="all" defaultValue="All" onSelect={AllProduct} >All</option> */}
 {
  filterCategory.map((item)=>{
   return(
-    <option  key={item.category} value={item.category} >{item.name}</option>
+    <option  key={item.category} value={item.category} onClick={(e)=>{selectedCategoryFilter(e.target.value)}}  >{item.name}</option>
   )
  })
 }
